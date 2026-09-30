@@ -17,7 +17,8 @@ class EventLoop:
     self.ready.append((callback,args))
 ### so for excuting those we will use below one
   def run_forever(self):
-    while self.ready:
+    self.running = True
+    while self.running and self.ready:
       callback , args = self.ready.popleft()
       callback(*args)
 
@@ -26,6 +27,17 @@ class EventLoop:
     self.call_soon(task.step) #here first understand what task.step will do -> in Task class step will start/resume the coroutine -> yieled  and using exception we will get value and  notic we did not keep task.step() we just wrote task.step because we dont want implement now so we want to tell event loop to excute it.
     # So call_soon puts this into ready queue and then run_forever takes it.
     return task
+
+  def stop(self): # with this we can stop the loop whenever we cant. without this we cant stop untill readyqueue becomes empty.
+    self.running = False
+
+  def run_untill_complete(self,task): #Run the EventLoop until this specific Task is finished.
+    self.running = True
+    while self.running and not task.done():
+      if self.ready:
+        callback , args = self.ready.popleft()
+        callback(*args)
+    
 
 
 

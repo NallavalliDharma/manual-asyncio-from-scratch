@@ -9,7 +9,9 @@
 # The problem statement says that  a Task owns one coroutine.and specifically suggest self.coroutine =  coroutine
 
 ##SO our intial task can be:
-from step4_future_test import Future
+from practice_tests.yield_control_test import YieldControl
+from practice_tests.step4_future_test import Future
+from practice_tests.step6_eventloop_test import EventLoop
 class Task(Future):
   def __init__(self,coroutine,loop): 
     super().__init__() #This calls Future.__init__()
@@ -26,6 +28,8 @@ class Task(Future):
 # when future incompletes (await future) yield future excutes means it pauses so that task registers callbacks and it should pause 
     if isinstance(yielded,Future):
       yielded.add_done_callback(self._wakeup)
+    elif isinstance(yielded,YieldControl):
+      self.loop.call_soon(self.step)
 ### Why isinstance function -> yielded means self.coroutine.send(None) so when it excutes the coroutine and reaches to await future there Future.__await__ function will check if task paused or not if paused it excutes yield so yielded gets future. so therefore yielded is the Future object that the coroutine is waiting for.
 
 ## isinstance() mean? -> isinstance(yielded, Future) asks "Is the object stored in yielded a Future?" so isinstance(future, Future) is True so "If the coroutine is waiting for a Future, do something about that Future."
