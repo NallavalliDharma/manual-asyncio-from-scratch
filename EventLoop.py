@@ -22,7 +22,7 @@ class EventLoop:
       callback(*args)
       
 
-  def run_untill_complete(self,task):
+  def run_until_complete(self,task):
     self.running = True
 
     while self.running and not task.done():

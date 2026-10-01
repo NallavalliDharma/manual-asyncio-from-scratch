@@ -13,7 +13,7 @@ task = loop.create_task(
     hello()
 )
 
-result = loop.run_untill_complete(
+result = loop.run_until_complete(
     task
 )
 
@@ -113,7 +113,7 @@ task = loop.create_task(
     main()
 )
 
-result = loop.run_untill_complete(
+result = loop.run_until_complete(
     task
 )
 
