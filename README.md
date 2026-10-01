@@ -1,24 +1,8 @@
-## Manual Implementation and Testing
-
 This project was implemented manually, step by step, without using Python's built-in `asyncio` or other restricted concurrency modules.
 
-The step-by-step implementation and individual testing performed during development are available in the practiced and tested folder.
+The step-by-step implementation and individual testing performed during development are available in the practice_tests folder.
 
-Each concept was implemented and tested individually before moving to the next step. The implementation was built and verified in the following order:
-
-1. `Future` class and its result/completion handling.
-2. `Task` class and coroutine execution using `send()`.
-3. `yield_control()` for cooperative scheduling.
-4. `EventLoop` with a ready queue and `call_soon()`.
-5. Future callbacks and Task wake-up using `_wakeup()`.
-6. A coroutine awaiting a `Future`.
-7. A `Task` awaiting another `Task`.
-8. `run_forever()` and `run_until_complete()` behavior.
-9. Final end-to-end testing using the required demonstration programs.
-
-Each step was tested manually to verify that the expected execution order, suspension, resumption, Future completion, callback handling, and Task scheduling were working correctly.
-
-The final implementation was then tested against all the required demo programs, and the expected outputs were successfully obtained.
+Each concept was implemented and tested individually before moving to the next step.
 ============================================================
 
 1. What is a coroutine?
